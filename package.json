@@ -1,0 +1,27 @@
+{
+  "name": "angularjs-parcel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run bundling\" \"npm run components\"",
+    "bundling": "npx parcel index.html",
+    "components": "npx gulp"
+  },
+  "author": "Nazarii Ustymchyk",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-inject-string": "^1.1.2",
+    "parcel": "^2.8.2",
+    "through2": "^4.0.2"
+  },
+  "dependencies": {
+    "angular": "^1.8.3",
+    "nanoid": "^4.0.0"
+  }
+}
