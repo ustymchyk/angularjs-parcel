@@ -4,12 +4,14 @@ const path = require('path');
 const htmlmin = require('gulp-htmlmin');
 const concat = require('gulp-concat');
 const inject = require('gulp-inject-string');
+const pug = require('gulp-pug');
 
-const templatesGlob = './markup/components/*.html';
+const templatesGlob = './markup/components/*.pug';
 
 function generateTemplates() {
   return gulp
     .src(templatesGlob)
+    .pipe(pug({}))
     .pipe(htmlmin({ collapseWhitespace: true, quoteCharacter: "'" }))
     .pipe(
       through.obj((file, enc, cb) => {
