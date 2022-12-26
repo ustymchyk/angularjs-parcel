@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run bundling\" \"npm run components\"",
     "bundling": "npx parcel index.html",

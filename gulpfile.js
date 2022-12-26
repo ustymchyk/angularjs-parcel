@@ -1,12 +1,13 @@
-const gulp = require('gulp');
-const through = require('through2');
-const path = require('path');
-const htmlmin = require('gulp-htmlmin');
-const concat = require('gulp-concat');
-const inject = require('gulp-inject-string');
-const pug = require('gulp-pug');
+import gulp from 'gulp';
+import through from 'through2';
+import path from 'path';
+import htmlmin from 'gulp-htmlmin';
+import concat from 'gulp-concat';
+import inject from 'gulp-inject-string';
+import pug from 'gulp-pug';
 
 const templatesGlob = './markup/components/*.pug';
+const camelize = (s) => s.replace(/-./g, (x) => x[1].toUpperCase());
 
 function generateTemplates() {
   return gulp
@@ -16,7 +17,7 @@ function generateTemplates() {
     .pipe(
       through.obj((file, enc, cb) => {
         const filename = path.parse(file.path).name;
-        file.contents = Buffer.from(`"${filename}": "${file.contents}"`);
+        file.contents = Buffer.from(`"${camelize(filename)}": "${file.contents}"`);
 
         cb(null, file);
       })
@@ -41,8 +42,8 @@ function generateComponentImports() {
     .pipe(gulp.dest('./src/'));
 }
 
-exports.default = function () {
+export default function () {
   const options = { events: 'all', ignoreInitial: false };
   const tasks = [generateTemplates, generateComponentImports];
   gulp.watch(templatesGlob, options, gulp.parallel(tasks));
-};
+}
